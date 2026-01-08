@@ -1,0 +1,16 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: demo-cluster
+  region: eu-central-1
+fargateProfiles:
+  - name: fp-default
+    selectors:
+      - namespace: default
+      - namespace: kube-system
+  - name: fp-game
+    selectors:
+      - namespace: game-2048
+iam:
+  withOIDC: true
