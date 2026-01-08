@@ -1,0 +1,9 @@
+clusterName: demo-cluster
+serviceAccount:
+  
+  create: false
+  
+  name: aws-load-balancer-controller
+
+region: eu-central-1
+vpcId: vpc-xxxxxxxxxxxxxx
