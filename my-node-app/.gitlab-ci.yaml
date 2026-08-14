@@ -1,0 +1,24 @@
+stages:
+  - test
+  - docker-build
+
+build_and_test:
+  stage: test
+  image: node:24-alpine3.23
+  script:
+    - npm ci
+    - npm run lint
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 day
+
+build_docker_image:
+  stage: docker-build
+  image: docker:24.0.5
+  services:
+    - docker:24.0.5-dind
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - echo "Docker image built successfully!"
